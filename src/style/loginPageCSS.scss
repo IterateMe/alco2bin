@@ -1,0 +1,67 @@
+@import "projectStyle";
+
+.loginCard{
+    padding: 59px 0 0;
+    position: relative;
+}
+.flexWrapperOne {
+    background-color: $white;
+    border-radius: 17px;
+    padding: 132px 29px 75px 32px;
+    box-shadow: 0 3px 20px 3px $transparent-black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+.nomDutilisateur {
+    width: 152px;
+@include roboto-18-light;
+    color: $transparent-black-2;
+    margin-left: 2px;
+}
+.line1 {
+    width: 379px;
+    height: 1px;
+    background-color: $black-coffee;
+    margin-bottom: 44px;
+    margin-left: 2px;
+}
+.motDePasse {
+@include roboto-18-light;
+    color: $transparent-black-2;
+    margin-bottom: 6px;
+    margin-left: 2px;
+}
+.line2 {
+    width: 379px;
+    height: 1px;
+    background-color: $black-coffee;
+    margin-bottom: 66px;
+}
+.flexWrapperTwo {
+    background-color: $blue-crayola;
+    border-radius: 30px;
+    padding: 7px 152px 9px 150px;
+    display: flex;
+    align-items: center;
+}
+.connexion {
+    width: 77px;
+@include roboto-16-regular;
+    color: $white;
+}
+.flexWrapperThree {
+    background-color: $blue-crayola;
+    border-radius: 50%;
+    padding: 36px 27px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 161px;
+    top: 0;
+}
+.a2b {
+@include roboto-condensed-40-regular;
+    color: $white;
+}

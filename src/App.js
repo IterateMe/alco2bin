@@ -1,49 +1,119 @@
-import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {Button} from '@material-ui/core';
+import Card from './components/card/card';
+import MainDashboard from './pages/mainDashboard';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {makeStyles} from "@material-ui/core";
+import fire from './fire';
+import Login from "./pages/login";
 
-class App extends React.Component{
+const useStyles = makeStyles((theme) => ({
+    link: {
+        textDecoration: 'none',
+        color: theme.palette.text.primary
+    }
+}));
 
-  constructor(props){
-    super(props);
-    this.state = {
-      switches: "inconnu"
+const App = () => {
+
+    const [user, setUser] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [hasAccount, setHasAccount] = useState('');
+
+    const clearInputs = () => {
+        setEmail("");
+        setPassword("");
     };
 
-  }
+    const clearErrors = () => {
+        setEmailError("");
+        setPasswordError("");
+    };
 
-  updateSwitches() {
-    const http = new XMLHttpRequest();
-    const url = 'http://192.168.1.10/cmd/sws';
+    const handleLogin = () => {
+        clearErrors();
+        fire
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .catch(err => {
+                switch (err.code) {
+                    case "auth/invalid-email":
+                    case "auth/user-disable":
+                    case "auth/user-not-found":
+                        setEmailError(err.message);
+                        break;
+                    case "auth/wrong-password":
+                        setPasswordError(err.message);
+                        break;
+                }
+            })
+    };
 
-    http.open("GET", url);
-    http.send();
-    http.onload = () => this.setState({switches: http.responseText});
+    const handleSignUp = () => {
+        clearErrors();
+        fire
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .catch(err => {
+                switch (err.code) {
+                    case "auth/email-already-in-use":
+                    case "auth/invalid-email":
+                        setEmailError(err.message);
+                        break;
+                    case "auth/weak-password":
+                        setPasswordError(err.message);
+                        break;
+                }
+            })
+    };
 
-  }
+    const handleLogout = () => {
+        fire.auth().signOut();
+    };
 
-  componentDidMount() {
-    this.interval = setInterval( () => this.updateSwitches(), 10);
-  }
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+    const authListener = () => {
+        fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+                clearInputs();
+                setUser(user);
+            } else {
+                setUser("");
+            }
+        });
+    };
 
-  render(){
+    useEffect(() => {
+        authListener();
+    }, []);
+
+    const classes = useStyles();
+
     return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>Hello!</p>
 
-            <p>L'état des interrupteurs est : </p>
-            <b><p id="switches">{this.state.switches}</p></b>
-
-          </header>
-        </div>
+            <div className="App">
+                {user ? (
+                    <MainDashboard handleLogout={handleLogout}/>
+                ) : (
+                    <Login email={email}
+                           setEmail={setEmail}
+                           password={password}
+                           setPassword={setPassword}
+                           handleLogin={handleLogin}
+                           handleSignup={handleSignUp}
+                           hasAccount={hasAccount}
+                           setHasAccount={setHasAccount}
+                           emailError={emailError}
+                           passwordError={passwordError}
+                    />
+                )}
+            </div>
     );
-  }
-}
+};
 
 
 export default App;
+
