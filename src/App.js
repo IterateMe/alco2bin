@@ -3,10 +3,10 @@ import React, {useEffect, useState} from 'react';
 import {Button} from '@material-ui/core';
 import Card from './components/card/card';
 import MainDashboard from './pages/mainDashboard';
+import LoginCard from './components/card/loginCard';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {makeStyles} from "@material-ui/core";
 import fire from './fire';
-import Login from "./pages/login";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -98,16 +98,17 @@ const App = () => {
                 {user ? (
                     <MainDashboard handleLogout={handleLogout}/>
                 ) : (
-                    <Login email={email}
-                           setEmail={setEmail}
-                           password={password}
-                           setPassword={setPassword}
-                           handleLogin={handleLogin}
-                           handleSignup={handleSignUp}
-                           hasAccount={hasAccount}
-                           setHasAccount={setHasAccount}
-                           emailError={emailError}
-                           passwordError={passwordError}
+                    <LoginCard
+                    email={email}
+                    setEmail={setEmail}
+                    password={password}
+                    setPassword={setPassword}
+                    handleLogin={handleLogin}
+                    handleSignup={handleSignUp}
+                    hasAccount={hasAccount}
+                    setHasAccount={setHasAccount}
+                    emailError={emailError}
+                    passwordError={passwordError}
                     />
                 )}
             </div>

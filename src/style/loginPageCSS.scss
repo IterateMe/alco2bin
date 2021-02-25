@@ -1,13 +1,16 @@
 @import "projectStyle";
 
 .loginCard{
-    padding: 59px 0 0;
+    padding-top: 59px;
+    margin: 0 auto;
+    width: 500px;
     position: relative;
+    text-align: center;
 }
 .flexWrapperOne {
     background-color: $white;
     border-radius: 17px;
-    padding: 132px 29px 75px 32px;
+    padding: 132px 30px 30px 30px;
     box-shadow: 0 3px 20px 3px $transparent-black;
     display: flex;
     flex-direction: column;
@@ -24,7 +27,6 @@
     width: 379px;
     height: 1px;
     background-color: $black-coffee;
-    margin-bottom: 44px;
     margin-left: 2px;
 }
 .motDePasse {
@@ -37,15 +39,8 @@
     width: 379px;
     height: 1px;
     background-color: $black-coffee;
-    margin-bottom: 66px;
 }
-.flexWrapperTwo {
-    background-color: $blue-crayola;
-    border-radius: 30px;
-    padding: 7px 152px 9px 150px;
-    display: flex;
-    align-items: center;
-}
+
 .connexion {
     width: 77px;
 @include roboto-16-regular;
@@ -54,8 +49,8 @@
 .flexWrapperThree {
     background-color: $blue-crayola;
     border-radius: 50%;
-    padding: 36px 27px;
     display: flex;
+    text-align: center;
     align-items: center;
     position: absolute;
     right: 161px;
@@ -64,4 +59,30 @@
 .a2b {
 @include roboto-condensed-40-regular;
     color: $white;
+}
+
+.center{
+    text-align: center;
+    margin: 20px auto 0;
+}
+
+.connexionButton {
+    background-color: $blue-crayola;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+}
+
+.primaryColor {
+    color: $blue-crayola;
+}
+
+.backgroundColor {
+    background-color: #f0f0f0;
 }
