@@ -33,7 +33,7 @@ class Switches extends React.Component {
 
     render() {
         return (
-            <div className="Switches">
+            <div >
                     <p>L'état des interrupteurs est : </p>
                     <b><p id="switches">{this.state.switches}</p></b>
             </div>

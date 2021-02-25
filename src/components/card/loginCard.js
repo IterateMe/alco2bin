@@ -84,7 +84,7 @@ const LoginCard = (props) => {
     const buttonForLoginRef = React.useRef(null);
 
     return (
-        <div className="backgroundColor">
+        <div>
             <div className="loginCard">
                 <div className="flexWrapperOne">
                     <TextField

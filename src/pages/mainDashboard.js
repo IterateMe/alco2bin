@@ -1,25 +1,34 @@
 import React, {useEffect, useState} from 'react';
 import { Button } from '@material-ui/core';
 import Switches from '../hw_components/Switches';
+import Ethylometre from '../hw_components/Ethylo';
 import "../style/loginPageCSS.scss";
 import {Link, Route, Switch} from "react-router-dom";
 
 function MainDashboard({handleLogout}) {
 
     return (
-        // <Router>
-        <div className="App">
-            <Switches/>
-            <Button onClick={handleLogout}>Se deconnecter</Button>
-            {/*<Link to="/mainDashboard" className={classes.link}>*/}
-            {/*    <Button type="submit" color="primary">Connexion</Button>*/}
-            {/*</Link>*/}
 
-            {/*<Switch>*/}
-            {/*    <Route path="/mainDashboard" component={MainDashboard}/>*/}
-            {/*</Switch>*/}
+        <div className="App">
+
+
+            <Link to="/switches">
+                <Button type="submit" color="primary">Switches</Button>
+            </Link>
+            <Link to="/ethylometre">
+                <Button type="submit" color="primary">Ethylometre</Button>
+            </Link>
+
+            <Switch>
+                <Route path="/switches" component={Switches}/>
+            </Switch>
+            <Switch>
+                <Route path="/ethylometre" component={Ethylometre}/>
+            </Switch>
+
+            <Button onClick={handleLogout}>Se deconnecter</Button>
         </div>
-        // <Router/>
+
     );
 }
 
