@@ -1,10 +1,8 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import {Button} from '@material-ui/core';
-import Card from './components/card/card';
 import MainDashboard from './pages/mainDashboard';
+import Ethylometre from './pages/ethylometre';
 import LoginCard from './components/card/loginCard';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {makeStyles} from "@material-ui/core";
 import fire from './fire';
 
@@ -96,7 +94,8 @@ const App = () => {
 
             <div className="App">
                 {user ? (
-                    <MainDashboard handleLogout={handleLogout}/>
+                    // <MainDashboard handleLogout={handleLogout}/>
+                    <Ethylometre handleLogout={handleLogout}/>
                 ) : (
                     <LoginCard
                     email={email}

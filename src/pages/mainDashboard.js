@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, CardActions, CardContent, Typography, makeStyles, Grid, Box} from '@material-ui/core';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { Container } from "@material-ui/core";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@material-ui/core';
+import {Container} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Switches from '../hw_components/Switches';
 import Ethylometre from '../hw_components/Ethylo';
 import "../style/loginPageCSS.scss";
-import {Link, Route, Switch} from "react-router-dom";
+import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 function MainDashboard({handleLogout}) {
 
@@ -17,7 +18,7 @@ function MainDashboard({handleLogout}) {
         rootCard: {
             display: 'inline-block',
             marginTop: 25,
-            width: "100%" ,
+            width: "100%",
         },
         bullet: {
             display: 'inline-block',
@@ -67,24 +68,26 @@ function MainDashboard({handleLogout}) {
                                     Tests
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <Link to="/switches">
-                                        <Button type="submit" color="primary">Switches</Button>
-                                    </Link>
-                                    <Divider/>
-                                    <Link to="/ethylometre">
-                                        <Button type="submit" color="primary">Ethylometre</Button>
-                                    </Link>
 
-                                    <Switch>
-                                        <Route path="/switches" component={Switches}/>
-                                    </Switch>
-                                    <Switch>
-                                        <Route path="/ethylometre" component={Ethylometre}/>
-                                    </Switch>
+                                    {/*Rajouter les onClick action pour changer le state de la page (afficher les differents dashboard)*/}
+
+                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Switches</Button>
+
+                                    <Divider/>
+
+                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
+
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
+
+                    <Switch>
+                        <Route path="/switches" component={Switches}/>
+                    </Switch>
+                    <Switch>
+                        <Route path="/ethylometre" component={Ethylometre}/>
+                    </Switch>
 
                     {/*Profil card*/}
 
@@ -95,19 +98,7 @@ function MainDashboard({handleLogout}) {
                                     Profil
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <Link to="/switches">
-                                        <Button type="submit" color="primary">Switches</Button>
-                                    </Link>
-                                    <Link to="/ethylometre">
-                                        <Button type="submit" color="primary">Ethylometre</Button>
-                                    </Link>
-
-                                    <Switch>
-                                        <Route path="/switches" component={Switches}/>
-                                    </Switch>
-                                    <Switch>
-                                        <Route path="/ethylometre" component={Ethylometre}/>
-                                    </Switch>
+                                    <p>Cette carte va contenir les informations sur l'usager</p>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -122,19 +113,7 @@ function MainDashboard({handleLogout}) {
                                     Top 5
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <Link to="/switches">
-                                        <Button type="submit" color="primary">Switches</Button>
-                                    </Link>
-                                    <Link to="/ethylometre">
-                                        <Button type="submit" color="primary">Ethylometre</Button>
-                                    </Link>
-
-                                    <Switch>
-                                        <Route path="/switches" component={Switches}/>
-                                    </Switch>
-                                    <Switch>
-                                        <Route path="/ethylometre" component={Ethylometre}/>
-                                    </Switch>
+                                    <p>Cette carte va contenir le palmares des etudiants qui ont brises les records sous forme de tableau</p>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -154,25 +133,12 @@ function MainDashboard({handleLogout}) {
                                     Historique
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <Link to="/switches">
-                                        <Button type="submit" color="primary">Switches</Button>
-                                    </Link>
-                                    <Link to="/ethylometre">
-                                        <Button type="submit" color="primary">Ethylometre</Button>
-                                    </Link>
-
-                                    <Switch>
-                                        <Route path="/switches" component={Switches}/>
-                                    </Switch>
-                                    <Switch>
-                                        <Route path="/ethylometre" component={Ethylometre}/>
-                                    </Switch>
+                                    <p>Cette carte va contenir des tableaux et des graphiques representant la manipulations et l'archivage des donnees propre a l'usager connecte</p>
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
-
             </div>
 
         </Container>
