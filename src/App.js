@@ -2,6 +2,7 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import MainDashboard from './pages/mainDashboard';
 import Ethylometre from './pages/ethylometre';
+import Reflex from './pages/reflex';
 import LoginCard from './components/card/loginCard';
 import {makeStyles} from "@material-ui/core";
 import fire from './fire';
@@ -95,7 +96,8 @@ const App = () => {
             <div className="App">
                 {user ? (
                     // <MainDashboard handleLogout={handleLogout}/>
-                    <Ethylometre handleLogout={handleLogout}/>
+                    // <Ethylometre handleLogout={handleLogout}/>
+                    <Reflex handleLogout={handleLogout}/>
                 ) : (
                     <LoginCard
                     email={email}
