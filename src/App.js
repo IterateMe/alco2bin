@@ -5,6 +5,7 @@ import Ethylometre from './pages/ethylometre';
 import LoginCard from './components/card/loginCard';
 import {makeStyles} from "@material-ui/core";
 import fire from './fire';
+import Reflex from "./pages/reflex";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -21,6 +22,11 @@ const App = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [hasAccount, setHasAccount] = useState('');
+    const [currentPage, setCurrentPage] = useState('mainDashboard');
+
+    const [pageToRender, setPageToRender] = useState('');
+
+
 
     const clearInputs = () => {
         setEmail("");
@@ -90,12 +96,25 @@ const App = () => {
 
     const classes = useStyles();
 
-    return (
+    const renderNextPage = (nextPage) =>
+    {
+        setCurrentPage(nextPage);
+    }
+    useEffect(() => {
+        console.log(currentPage);
+        if (currentPage === "mainDashboard") {
+            setPageToRender(<MainDashboard handleLogout={handleLogout} renderNextPage={renderNextPage} />);
+        } else if (currentPage === "Ethylometre") {
+            setPageToRender(<Ethylometre handleLogout={handleLogout} setCurrentPage={setCurrentPage}/>);
+        } else if (currentPage === "Reflex") {
+            setPageToRender(<Reflex handleLogout={handleLogout} setCurrentPage={setCurrentPage}/>);
+        }
+    },[currentPage]);
 
+    return (
             <div className="App">
                 {user ? (
-                    // <MainDashboard handleLogout={handleLogout}/>
-                    <Ethylometre handleLogout={handleLogout}/>
+                    pageToRender
                 ) : (
                     <LoginCard
                     email={email}

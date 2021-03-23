@@ -36,6 +36,8 @@ function Reflex({handleLogout}) {
 
     const classes = useStyles();
 
+
+
     return (
 
         <Container>
@@ -46,7 +48,7 @@ function Reflex({handleLogout}) {
 
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <h1>Alco2bin</h1>
+                        <h1>Alco2bin - Tests - Réflexes</h1>
                     </Grid>
                     <Grid item xs={6}>
                         <Box display="flex" flexDirection="row-reverse" alignItems="center" className="paddingTop">

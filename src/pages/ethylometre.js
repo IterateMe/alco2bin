@@ -36,6 +36,10 @@ function Ethylometre({handleLogout}) {
 
     const classes = useStyles();
 
+    const moveToReflex = () => {
+        renderNextPage("Reflex");
+    };
+
     return (
 
         <Container>
@@ -46,7 +50,7 @@ function Ethylometre({handleLogout}) {
 
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <h1>Alco2bin</h1>
+                        <h1>Alco2bin - Éthylo Test</h1>
                     </Grid>
                     <Grid item xs={6}>
                         <Box display="flex" flexDirection="row-reverse" alignItems="center" className="paddingTop">
@@ -75,7 +79,7 @@ function Ethylometre({handleLogout}) {
 
                                     <Divider/>
 
-                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
+                                    <Button onClick={moveToReflex} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Test Reflexes</Button>
 
                                 </Typography>
                             </CardContent>
