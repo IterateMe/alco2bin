@@ -9,7 +9,7 @@ import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-function Ethylometre({handleLogout}) {
+function Ethylometre({handleLogout, renderNextPage}) {
 
     const useStyles = makeStyles({
         root: {

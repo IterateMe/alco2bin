@@ -12,7 +12,6 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 function MainDashboard({handleLogout, renderNextPage}) {
 
 
-
     const useStyles = makeStyles({
         root: {
             flexGrow: 1,

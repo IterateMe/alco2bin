@@ -105,9 +105,9 @@ const App = () => {
         if (currentPage === "mainDashboard") {
             setPageToRender(<MainDashboard handleLogout={handleLogout} renderNextPage={renderNextPage} />);
         } else if (currentPage === "Ethylometre") {
-            setPageToRender(<Ethylometre handleLogout={handleLogout} setCurrentPage={setCurrentPage}/>);
+            setPageToRender(<Ethylometre handleLogout={handleLogout} renderNextPage={renderNextPage}/>);
         } else if (currentPage === "Reflex") {
-            setPageToRender(<Reflex handleLogout={handleLogout} setCurrentPage={setCurrentPage}/>);
+            setPageToRender(<Reflex handleLogout={handleLogout} renderNextPage={renderNextPage}/>);
         }
     },[currentPage]);
 
