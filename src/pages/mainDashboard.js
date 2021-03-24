@@ -9,7 +9,8 @@ import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-function MainDashboard({handleLogout}) {
+function MainDashboard({handleLogout, renderNextPage}) {
+
 
     const useStyles = makeStyles({
         root: {
@@ -36,6 +37,14 @@ function MainDashboard({handleLogout}) {
 
     const classes = useStyles();
 
+    const moveToEthylo = () => {
+        renderNextPage("Ethylometre");
+    };
+
+    const moveToReflex = () => {
+        renderNextPage("Reflex");
+    };
+
     return (
 
         <Container>
@@ -46,7 +55,7 @@ function MainDashboard({handleLogout}) {
 
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <h1>Alco2bin</h1>
+                        <h1>Alco2bin - Page Principale</h1>
                     </Grid>
                     <Grid item xs={6}>
                         <Box display="flex" flexDirection="row-reverse" alignItems="center" className="paddingTop">
@@ -75,19 +84,16 @@ function MainDashboard({handleLogout}) {
 
                                     <Divider/>
 
-                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
+                                    <Button onClick={moveToReflex} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Test de réflexes</Button>
+
+                                    <Divider/>
+
+                                    <Button onClick={moveToEthylo} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
 
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
-
-                    <Switch>
-                        <Route path="/switches" component={Switches}/>
-                    </Switch>
-                    <Switch>
-                        <Route path="/ethylometre" component={Ethylometre}/>
-                    </Switch>
 
                     {/*Profil card*/}
 

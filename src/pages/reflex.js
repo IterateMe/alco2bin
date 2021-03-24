@@ -9,7 +9,7 @@ import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-function Reflex({handleLogout}) {
+function Reflex({handleLogout, renderNextPage}) {
 
     const useStyles = makeStyles({
         root: {
@@ -36,6 +36,11 @@ function Reflex({handleLogout}) {
 
     const classes = useStyles();
 
+    const moveToEthylo = () => {
+        renderNextPage("Ethylometre");
+    };
+
+
     return (
 
         <Container>
@@ -46,7 +51,7 @@ function Reflex({handleLogout}) {
 
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <h1>Alco2bin</h1>
+                        <h1>Alco2bin - Tests - Réflexes</h1>
                     </Grid>
                     <Grid item xs={6}>
                         <Box display="flex" flexDirection="row-reverse" alignItems="center" className="paddingTop">
@@ -75,7 +80,7 @@ function Reflex({handleLogout}) {
 
                                     <Divider/>
 
-                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
+                                    <Button onClick={moveToEthylo} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
 
                                 </Typography>
                             </CardContent>
