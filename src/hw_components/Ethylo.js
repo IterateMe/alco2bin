@@ -37,7 +37,7 @@ class Ethylo extends React.Component {
             <div className="Switches">
                 <p>Les valeurs de l'éthylomètre sont: </p>
                 <b><p id="ethylo">Ethylomètre : {this.state.alcool} g/L</p></b>
-                <b><p id="ethylo">Valeur max : {this.state.maxAlcool} mL/s</p></b>
+                <b><p id="ethylo">Valeur max : {this.state.maxAlcool} g/L</p></b>
                 <b><p id="ethylo">Débit expiratoire : {this.state.flow} mL/s</p></b>
             </div>
         );
