@@ -5,9 +5,11 @@ import {Container} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Switches from '../hw_components/Switches';
 import Ethylo from '../hw_components/Ethylo';
+import StartTest from '../hw_components/StartTest';
 import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 function Reflex({handleLogout, renderNextPage}) {
 
@@ -40,6 +42,10 @@ function Reflex({handleLogout, renderNextPage}) {
         renderNextPage("Ethylometre");
     };
 
+    const moveToMain = () => {
+        renderNextPage("mainDashboard");
+    };
+
 
     return (
 
@@ -60,6 +66,10 @@ function Reflex({handleLogout, renderNextPage}) {
                     </Grid>
                 </Grid>
 
+                <div>
+                    <Button onClick={moveToMain} type="submit" color="primary" startIcon={<ArrowBackIosIcon/>}>Acceuil</Button>
+                </div>
+
                 {/*First row dashboard*/}
 
                 <Grid container spacing={3}>
@@ -74,13 +84,10 @@ function Reflex({handleLogout, renderNextPage}) {
                                 </Typography>
                                 <Typography variant="body2" component="p">
 
-                                    {/*Rajouter les onClick action pour partir, arreter ou calibrer le test*/}
-
-                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Switches</Button>
+                                    <StartTest/>
 
                                     <Divider/>
 
-                                    <Button onClick={moveToEthylo} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
 
                                 </Typography>
                             </CardContent>

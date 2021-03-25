@@ -9,6 +9,7 @@ import StartTest from '../hw_components/StartTest';
 import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function Ethylometre({handleLogout, renderNextPage}) {
 
@@ -41,6 +42,10 @@ function Ethylometre({handleLogout, renderNextPage}) {
         renderNextPage("Reflex");
     };
 
+    const moveToMain = () => {
+        renderNextPage("mainDashboard");
+    };
+
     return (
 
         <Container>
@@ -59,6 +64,10 @@ function Ethylometre({handleLogout, renderNextPage}) {
                         </Box>
                     </Grid>
                 </Grid>
+
+                <div>
+                    <Button onClick={moveToMain} type="submit" color="primary" startIcon={<ArrowBackIosIcon/>}>Acceuil</Button>
+                </div>
 
                 {/*First row dashboard*/}
 
@@ -80,7 +89,6 @@ function Ethylometre({handleLogout, renderNextPage}) {
 
                                     <Divider/>
 
-                                    <Button onClick={moveToReflex} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Test Reflexes</Button>
 
                                 </Typography>
                             </CardContent>

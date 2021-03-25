@@ -78,12 +78,6 @@ function MainDashboard({handleLogout, renderNextPage}) {
                                 </Typography>
                                 <Typography variant="body2" component="p">
 
-                                    {/*Rajouter les onClick action pour changer le state de la page (afficher les differents dashboard)*/}
-
-                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Switches</Button>
-
-                                    <Divider/>
-
                                     <Button onClick={moveToReflex} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Test de réflexes</Button>
 
                                     <Divider/>
