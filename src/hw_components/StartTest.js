@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import Button from "@material-ui/core/Button";
+import { Typography } from '@material-ui/core';
 
 const StartTest = (props) => {
 
     const [test, setTest] = useState(props.test);
     const [pending, setPending] = useState(0);
+    const [state, setState] = useState();
+    const [message, setMessage] = useState("");
 
     const handleClick = () => {
         const http = new XMLHttpRequest();
@@ -17,7 +20,13 @@ const StartTest = (props) => {
                 setPending(0);
                 const response = JSON.parse(http.responseText);
                 console.log(response);
-                this.setState(response);
+                const status = response.status;
+                if(status==="success"){
+                    setState("pending")
+                    setMessage("Test démarré, veuillez souffler dans l'éthylomètre")
+                }else if(status==="error"){
+                    setMessage(response.message)
+                }
             }
             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             http.onreadystatechange = function() { // Call a function when the state changes.
@@ -25,15 +34,18 @@ const StartTest = (props) => {
                     setPending(0);
                 }
             }
-            const args = "test="
+            const json = {
+                "test":"ethylo"
+            };
             //args.concat(this.props.test)
-            http.send("test=ethylo");
+            http.send(JSON.stringify(json));
         }
     }
 
         return (
             <div >
                 <Button onClick={handleClick}>Start test</Button>
+                <Typography>{message}</Typography>
             </div>
         );
 
