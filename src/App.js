@@ -6,7 +6,6 @@ import Reflex from './pages/reflex';
 import LoginCard from './components/card/loginCard';
 import {makeStyles} from "@material-ui/core";
 import fire from './fire';
-import Reflex from "./pages/reflex";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -115,13 +114,9 @@ const App = () => {
     return (
             <div className="App">
                 {user ? (
-<<<<<<< HEAD
-                    // <MainDashboard handleLogout={handleLogout}/>
-                    // <Ethylometre handleLogout={handleLogout}/>
-                    <Reflex handleLogout={handleLogout}/>
-=======
+
                     pageToRender
->>>>>>> 26674c98eefebd4c449044f95ce362298ef3a4f9
+
                 ) : (
                     <LoginCard
                     email={email}

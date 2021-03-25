@@ -5,6 +5,7 @@ import {Container} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Switches from '../hw_components/Switches';
 import Ethylo from '../hw_components/Ethylo';
+import StartTest from '../hw_components/StartTest';
 import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -75,7 +76,7 @@ function Ethylometre({handleLogout, renderNextPage}) {
 
                                     {/*Rajouter les onClick action pour partir, arreter ou calibrer le test*/}
 
-                                    <Button type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Switches</Button>
+                                    <StartTest/>
 
                                     <Divider/>
 
