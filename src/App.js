@@ -17,15 +17,15 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
 
     const [user, setUser] = useState('');
+    const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [hasAccount, setHasAccount] = useState('');
+
     const [currentPage, setCurrentPage] = useState('mainDashboard');
-
     const [pageToRender, setPageToRender] = useState('');
-
 
 
     const clearInputs = () => {
@@ -62,6 +62,29 @@ const App = () => {
         fire
             .auth()
             .createUserWithEmailAndPassword(email, password)
+            .onAuthStateChanged(function(user) {
+
+                if (user) {
+
+                    // Updates the user attributes:
+
+                    user.updateProfile({ // <-- Update Method here
+
+                        displayName: userName,
+
+                    }).then(function() {
+
+                        // Profile updated successfully!
+                        //  "NEW USER NAME"
+
+                        var displayName = user.displayName;
+
+                    }, function(error) {
+                        // An error happened.
+                    });
+
+                }
+            })
             .catch(err => {
                 switch (err.code) {
                     case "auth/email-already-in-use":
@@ -120,6 +143,8 @@ const App = () => {
                 ) : (
                     <LoginCard
                     email={email}
+                    userName={userName}
+                    setuserName={setUserName}
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}

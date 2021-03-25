@@ -4,10 +4,11 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material
 import { green, purple } from '@material-ui/core/colors';
 import Background from "../../image/loginBackground.svg"
 import  '../../style/loginPageCSS.scss';
+import * as url from "url";
 
 const LoginCard = (props) => {
 
-    const {email, setEmail, password, setPassword, handleLogin, handleSignup, hasAccount, setHasAccount, emailError, passwordError} = props;
+    const {email, setEmail, userName, setuserName, password, setPassword, handleLogin, handleSignup, hasAccount, setHasAccount, emailError, passwordError} = props;
 
     const BootstrapButton = withStyles({
         root: {
@@ -84,9 +85,95 @@ const LoginCard = (props) => {
     const buttonForLoginRef = React.useRef(null);
 
     return (
-        <div>
+        <div className="background" >
             <div className="loginCard">
                 <div className="flexWrapperOne">
+                    {hasAccount ? (
+                        <>
+                        <TextField
+                            type="text"
+                            autoFocus
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            fullWidth
+                            label="Adresse courriel"
+                            className={classes.margin}
+                            inputRef={textFieldForUsernameRef}
+                            inputProps={{
+                                onKeyPress: event => {
+                                    const { key } = event;
+                                    console.log(key);
+                                    if (key === "Enter") {
+                                        textFieldForPasswordRef.current.focus();
+                                    }
+                                }
+                            }}
+                        />
+                        <p>{emailError}</p>
+                        <TextField
+                        type="password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        fullWidth
+                        label="Mot de passe"
+                        className={classes.margin}
+                        inputRef={textFieldForPasswordRef}
+                        inputProps={{
+                        onKeyPress: event => {
+                        const { key } = event;
+                        console.log(key);
+                        if (key === "Enter") {
+                        buttonForLoginRef.current.click();
+                    }
+                    }
+                    }}
+                        />
+                        <p>{passwordError}</p>
+                        </>) : (<>
+                        <TextField
+                            type="text"
+                            autoFocus
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            fullWidth
+                            label="Adresse courriel"
+                            className={classes.margin}
+                            inputRef={textFieldForUsernameRef}
+                            inputProps={{
+                                onKeyPress: event => {
+                                    const { key } = event;
+                                    console.log(key);
+                                    if (key === "Enter") {
+                                        textFieldForPasswordRef.current.focus();
+                                    }
+                                }
+                            }}
+                        />
+                        <p>{emailError}</p>
+                        <TextField
+                            type="password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            fullWidth
+                            label="Mot de passe"
+                            className={classes.margin}
+                            inputRef={textFieldForPasswordRef}
+                            inputProps={{
+                                onKeyPress: event => {
+                                    const { key } = event;
+                                    console.log(key);
+                                    if (key === "Enter") {
+                                        buttonForLoginRef.current.click();
+                                    }
+                                }
+                            }}
+                        />
+                        <p>{passwordError}</p>
+                    </>)}
                     <TextField
                         type="text"
                         autoFocus

@@ -5,6 +5,7 @@ import {Container} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Switches from '../hw_components/Switches';
 import Ethylometre from '../hw_components/Ethylo';
+import Footer from '../components/footer';
 import "../style/loginPageCSS.scss";
 import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -20,6 +21,8 @@ function MainDashboard({handleLogout, renderNextPage}) {
             display: 'inline-block',
             marginTop: 25,
             width: "100%",
+            boxShadow: "1px 3px 15px #9E9E9E",
+            borderRadius: 10,
         },
         bullet: {
             display: 'inline-block',
@@ -33,6 +36,7 @@ function MainDashboard({handleLogout, renderNextPage}) {
         pos: {
             marginBottom: 12,
         },
+
     });
 
     const classes = useStyles();
@@ -55,7 +59,7 @@ function MainDashboard({handleLogout, renderNextPage}) {
 
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <h1>Alco2bin - Page Principale</h1>
+                        <h1>Alco2bin</h1>
                     </Grid>
                     <Grid item xs={6}>
                         <Box display="flex" flexDirection="row-reverse" alignItems="center" className="paddingTop">
@@ -140,6 +144,8 @@ function MainDashboard({handleLogout, renderNextPage}) {
                     </Grid>
                 </Grid>
             </div>
+
+            <Footer/>
 
         </Container>
 
