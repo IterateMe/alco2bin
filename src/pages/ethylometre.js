@@ -85,10 +85,10 @@ function Ethylometre({handleLogout, renderNextPage}) {
 
                                     {/*Rajouter les onClick action pour partir, arreter ou calibrer le test*/}
 
-                                    <StartTest/>
-
+                                    <StartTest test="ethylo"/>
+                                    
                                     <Divider/>
-
+                                    <Ethylo/>
 
                                 </Typography>
                             </CardContent>

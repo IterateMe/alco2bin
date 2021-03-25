@@ -35,7 +35,7 @@ const StartTest = (props) => {
                 }
             }
             const json = {
-                "test":"ethylo"
+                "test":test
             };
             //args.concat(this.props.test)
             http.send(JSON.stringify(json));
