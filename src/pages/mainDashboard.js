@@ -3,14 +3,12 @@ import {Button, Card, CardActions, CardContent, Typography, makeStyles, Grid, Bo
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@material-ui/core';
 import {Container} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
-import Switches from '../hw_components/Switches';
 import Ethylometre from '../hw_components/Ethylo';
 import Footer from '../components/footer';
 import "../style/loginPageCSS.scss";
-import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-function MainDashboard({handleLogout, renderNextPage}) {
+function MainDashboard({handleLogout, renderNextPage, userName}) {
 
 
     const useStyles = makeStyles({
@@ -80,13 +78,15 @@ function MainDashboard({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Tests
                                 </Typography>
-                                <Typography variant="body2" component="p">
+                                <Typography variant="body2" component="span">
 
-                                    <Button onClick={moveToReflex} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Test de réflexes</Button>
+                                    <Button onClick={moveToReflex} type="submit" color="primary"
+                                            endIcon={<ArrowForwardIosIcon/>}>Test de réflexes</Button>
 
                                     <Divider/>
 
-                                    <Button onClick={moveToEthylo} type="submit" color="primary" endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
+                                    <Button onClick={moveToEthylo} type="submit" color="primary"
+                                            endIcon={<ArrowForwardIosIcon/>}>Ethylometre</Button>
 
                                 </Typography>
                             </CardContent>
@@ -101,8 +101,8 @@ function MainDashboard({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Profil
                                 </Typography>
-                                <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir les informations sur l'usager</p>
+                                <Typography variant="body2" component="span">
+                                    Cette carte va contenir les informations sur l'usager
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -116,8 +116,8 @@ function MainDashboard({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Top 5
                                 </Typography>
-                                <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir le palmares des etudiants qui ont brises les records sous forme de tableau</p>
+                                <Typography variant="body2" component="span">
+                                    Cette carte va contenir le palmares des etudiants qui ont brises les records sous forme de tableau
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -136,8 +136,8 @@ function MainDashboard({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Historique
                                 </Typography>
-                                <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir des tableaux et des graphiques representant la manipulations et l'archivage des donnees propre a l'usager connecte</p>
+                                <Typography variant="body2" component="span">
+                                    Cette carte va contenir des tableaux et des graphiques representant la manipulations et l'archivage des donnees propre a l'usager connecte
                                 </Typography>
                             </CardContent>
                         </Card>

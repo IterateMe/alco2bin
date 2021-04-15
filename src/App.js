@@ -18,6 +18,7 @@ const App = () => {
 
     const [user, setUser] = useState('');
     const [userName, setUserName] = useState('');
+    const [currentUserName, setCurrentUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -26,6 +27,9 @@ const App = () => {
 
     const [currentPage, setCurrentPage] = useState('mainDashboard');
     const [pageToRender, setPageToRender] = useState('');
+
+    const db = fire.database();
+
 
 
     const clearInputs = () => {
@@ -62,28 +66,8 @@ const App = () => {
         fire
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .onAuthStateChanged(function(user) {
-
-                if (user) {
-
-                    // Updates the user attributes:
-
-                    user.updateProfile({ // <-- Update Method here
-
-                        displayName: userName,
-
-                    }).then(function() {
-
-                        // Profile updated successfully!
-                        //  "NEW USER NAME"
-
-                        var displayName = user.displayName;
-
-                    }, function(error) {
-                        // An error happened.
-                    });
-
-                }
+            .then(function(user){
+                db.ref(`users/${fire.auth().currentUser.uid}`).set({userName: userName});
             })
             .catch(err => {
                 switch (err.code) {
@@ -107,6 +91,10 @@ const App = () => {
             if (user) {
                 clearInputs();
                 setUser(user);
+                fire.database().ref(`users/${fire.auth().currentUser.uid}/userName`).on('value', (snapshot) => {
+                    setCurrentUserName(snapshot.val());
+                    console.log(currentUserName);
+                })
             } else {
                 setUser("");
             }
@@ -123,10 +111,11 @@ const App = () => {
     {
         setCurrentPage(nextPage);
     }
+
     useEffect(() => {
         console.log(currentPage);
         if (currentPage === "mainDashboard") {
-            setPageToRender(<MainDashboard handleLogout={handleLogout} renderNextPage={renderNextPage} />);
+            setPageToRender(<MainDashboard handleLogout={handleLogout} renderNextPage={renderNextPage} userName={currentUserName}/>);
         } else if (currentPage === "Ethylometre") {
             setPageToRender(<Ethylometre handleLogout={handleLogout} renderNextPage={renderNextPage}/>);
         } else if (currentPage === "Reflex") {
@@ -144,7 +133,7 @@ const App = () => {
                     <LoginCard
                     email={email}
                     userName={userName}
-                    setuserName={setUserName}
+                    setUserName={setUserName}
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}
