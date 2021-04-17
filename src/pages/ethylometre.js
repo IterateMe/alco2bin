@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, CardActions, CardContent, Typography, makeStyles, Grid, Box} from '@material-ui/core';
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    Typography,
+    makeStyles,
+    Grid,
+    Box,
+    responsiveFontSizes
+} from '@material-ui/core';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@material-ui/core';
 import {Container} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
@@ -11,6 +21,7 @@ import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Footer from "../components/footer";
+import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from 'victory';
 
 function Ethylometre({handleLogout, renderNextPage}) {
 
@@ -49,14 +60,20 @@ function Ethylometre({handleLogout, renderNextPage}) {
         renderNextPage("mainDashboard");
     };
 
+    const data = [
+        {a:1, b:10},
+        {a:2, b:20},
+        {a:3, b:30},
+        {a:4, b:40}
+    ];
+
     return (
 
-        <Container>
+        <Container >
 
             <div className={classes.root}>
 
                 {/*Header*/}
-
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
                         <h1>Alco2bin</h1>
@@ -144,19 +161,37 @@ function Ethylometre({handleLogout, renderNextPage}) {
 
                     <Grid item xs>
                         <Card className={classes.rootCard}>
-                            <CardContent>
+                            <CardContent >
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Analyse des données en temps réel
                                 </Typography>
                                 <Typography variant="body2" component="p">
                                     <p>Cette carte va contenir des tableaux et des graphiques representant la manipulations et l'archivage des donnees propre a l'usager connecte</p>
                                 </Typography>
+                                        <VictoryChart
+                                            domainPadding={20}
+                                            height={250}
+                                            width={300}
+                                            theme={VictoryTheme.material}
+                                        >
+                                            <VictoryBar
+                                                data={data}
+                                                x="a"
+                                                y="b"
+
+                                            />
+                                            <VictoryAxis crossAxis
+                                                 style={{
+                                                     tickLabels: {fontSize: 5}
+                                                 }}
+                                            />
+                                        </VictoryChart>
+
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
             </div>
-
             <Footer/>
 
         </Container>
