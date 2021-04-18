@@ -142,7 +142,7 @@ function Ethylometre({handleLogout, renderNextPage}) {
                         <Card className={classes.rootCard}>
                             <CardContent>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    Informations générales
+                                    Réglages
                                 </Typography>
                                 <Typography variant="body2" component="p">
                                     <p>Cette carte va contenir les informations sur l'usager</p>
