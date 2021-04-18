@@ -11,6 +11,7 @@ import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Footer from "../components/footer";
+import {VictoryBar, VictoryChart, VictoryTheme, VictoryStack, VictoryAxis} from 'victory';
 
 function Reflex({handleLogout, renderNextPage}) {
 
@@ -49,6 +50,10 @@ function Reflex({handleLogout, renderNextPage}) {
         renderNextPage("mainDashboard");
     };
 
+    const data = [
+        [{a:"Result", b:10}],
+        [{a:"Result", b:20}]
+    ];
 
     return (
 
@@ -128,7 +133,13 @@ function Reflex({handleLogout, renderNextPage}) {
                                     Réglages
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir le palmares des etudiants qui ont brises les records sous forme de tableau</p>
+                                    <p>
+                                        <ol>
+                                            <li>Déclancher le test en appuyant sur "Start Test"</li>
+                                            <li>Appuyer rapidement sur le bouton lorsque le LED s'allume sur le FPGA</li>
+                                            <li>Attendre le résultat apparaître sur le FPGA ou cette interface</li>
+                                        </ol>
+                                    </p>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -147,9 +158,40 @@ function Reflex({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Analyse des données en temps réel
                                 </Typography>
-                                <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir des tableaux et des graphiques representant la manipulations et l'archivage des donnees propre a l'usager connecte</p>
-                                </Typography>
+                                <VictoryChart
+                                    height={150}
+                                    width={400}
+                                    theme={VictoryTheme.material}
+                                    domainPadding={{ x: 10 }}
+                                >
+                                    <VictoryStack horizontal
+                                        colorScale={["black", "blue"]}
+                                    >
+                                        <VictoryBar
+                                            data={[{x:"Résultat", y:100}]}
+                                        />
+
+                                        <VictoryBar
+                                            data={[{x:"Résultat", y:200}]}
+                                        />
+                                    </VictoryStack>
+                                    <VictoryAxis crossAxis
+                                                 tickValues={["Résultat"]}
+                                                 style={{
+                                                     tickLabels: {fontSize: 5, padding: 20}
+                                                 }}
+                                                 standalone={false}
+                                    />
+                                    <VictoryAxis dependentAxis crossAxis
+
+                                                 style={{
+                                                     tickLabels: {fontSize: 5, padding: 20}
+                                                 }}
+                                                 domain={[0, 1000]}
+                                                 theme={VictoryTheme.material}
+                                                 standalone={false}
+                                    />
+                                </VictoryChart>
                             </CardContent>
                         </Card>
                     </Grid>

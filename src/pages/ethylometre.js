@@ -143,10 +143,17 @@ function Ethylometre({handleLogout, renderNextPage}) {
                         <Card className={classes.rootCard}>
                             <CardContent>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    Réglages
+                                    Informations générales
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir le palmares des etudiants qui ont brises les records sous forme de tableau</p>
+                                    <p>
+                                        <ol>
+                                            <li>Déclancher le test en appuyant sur "Start Test"</li>
+                                            <li>Observer l'afficheur sur le FPGA</li>
+                                            <li>Souffler avec un débit adéquat dans l'ambout de 5 à 10 secondes</li>
+                                            <li>Suivre les instructions sur le FPGA afin de maintenir un souffle adéquat</li>
+                                        </ol>
+                                    </p>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -165,25 +172,34 @@ function Ethylometre({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Analyse des données en temps réel
                                 </Typography>
-                                <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir des tableaux et des graphiques representant la manipulations et l'archivage des donnees propre a l'usager connecte</p>
-                                </Typography>
                                         <VictoryChart
-                                            domainPadding={20}
-                                            height={250}
-                                            width={300}
+                                            height={150}
+                                            width={400}
                                             theme={VictoryTheme.material}
                                         >
                                             <VictoryBar
+                                                padding={10}
                                                 data={data}
                                                 x="a"
                                                 y="b"
 
                                             />
                                             <VictoryAxis crossAxis
-                                                 style={{
-                                                     tickLabels: {fontSize: 5}
-                                                 }}
+
+                                                         tickValues={[2, 3, 4, 5]}
+                                                         style={{
+                                                             tickLabels: {fontSize: 5, padding: 20}
+                                                         }}
+                                                         standalone={false}
+                                            />
+                                            <VictoryAxis dependentAxis crossAxis
+
+                                                         style={{
+                                                             tickLabels: {fontSize: 5, padding: 20}
+                                                         }}
+                                                         domain={[-10, 100]}
+                                                         theme={VictoryTheme.material}
+                                                         standalone={false}
                                             />
                                         </VictoryChart>
 
