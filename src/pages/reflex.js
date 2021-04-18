@@ -42,10 +42,6 @@ function Reflex({handleLogout, renderNextPage}) {
 
     const classes = useStyles();
 
-    const moveToEthylo = () => {
-        renderNextPage("Ethylometre");
-    };
-
     const moveToMain = () => {
         renderNextPage("mainDashboard");
     };
@@ -115,10 +111,10 @@ function Reflex({handleLogout, renderNextPage}) {
                         <Card className={classes.rootCard}>
                             <CardContent>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    Informations générales
+                                    Réglages
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir les informations sur l'usager</p>
+                                    <p>Aucun réglage disponible pour l'instant</p>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -130,7 +126,7 @@ function Reflex({handleLogout, renderNextPage}) {
                         <Card className={classes.rootCard}>
                             <CardContent>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    Réglages
+                                    Informations générales
                                 </Typography>
                                 <Typography variant="body2" component="p">
                                     <p>
@@ -138,6 +134,7 @@ function Reflex({handleLogout, renderNextPage}) {
                                             <li>Déclancher le test en appuyant sur "Start Test"</li>
                                             <li>Appuyer rapidement sur le bouton lorsque le LED s'allume sur le FPGA</li>
                                             <li>Attendre le résultat apparaître sur le FPGA ou cette interface</li>
+                                            <li>Si vous êtes allés trop vite, vous devrez recommencer</li>
                                         </ol>
                                     </p>
                                 </Typography>
@@ -178,14 +175,14 @@ function Reflex({handleLogout, renderNextPage}) {
                                     <VictoryAxis crossAxis
                                                  tickValues={["Résultat"]}
                                                  style={{
-                                                     tickLabels: {fontSize: 5, padding: 20}
+                                                     tickLabels: {fontSize: 5, padding: 2}
                                                  }}
                                                  standalone={false}
                                     />
                                     <VictoryAxis dependentAxis crossAxis
 
                                                  style={{
-                                                     tickLabels: {fontSize: 5, padding: 20}
+                                                     tickLabels: {fontSize: 5, padding: 2}
                                                  }}
                                                  domain={[0, 1000]}
                                                  theme={VictoryTheme.material}

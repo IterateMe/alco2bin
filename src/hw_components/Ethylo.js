@@ -8,6 +8,7 @@ class Ethylo extends React.Component {
             alcool: "inconnu",
             maxAlcool : "inconnu",
             flow: "inconnu",
+            testState: false,
         };
     }
 
@@ -21,6 +22,8 @@ class Ethylo extends React.Component {
             const response = JSON.parse(http.responseText);
             console.log(response);
             this.setState(response);
+            this.props.getData(this.state.alcool)
+            this.props.handleTestSTate(this.state.testState)
         };
     }
 

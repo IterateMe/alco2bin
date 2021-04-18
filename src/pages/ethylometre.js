@@ -21,6 +21,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Footer from "../components/footer";
 import { VictoryLine, VictoryChart, VictoryTheme, VictoryAxis } from 'victory';
+import ChangeDebitMinMax from "../hw_components/ChangeDebitMinMax";
 
 function Ethylometre({handleLogout, renderNextPage}) {
 
@@ -51,35 +52,37 @@ function Ethylometre({handleLogout, renderNextPage}) {
 
     const classes = useStyles();
 
-    const moveToReflex = () => {
-        renderNextPage("Reflex");
-    };
-
     const moveToMain = () => {
         renderNextPage("mainDashboard");
     };
 
-    const [counter, setCounter] = useState(4)
+    const [counter, setCounter] = useState(0)
+    const [data, setData] = useState([])
+    const [xAxis, setXAxis] = useState([0])
+    const [testState, setTestState] = useState(false)
 
-    const [data, setData] = useState([{x:0, y:10}]
+    let result = []
+    let tickValues = []
 
-    )
-
-    let result = [
-        {x:1, y:10},
-        {x:2, y:20},
-        {x:3, y:30},
-        {x:4, y:40}
-    ]
-
-    const handleClick = () => {
-        setCounter(counter + 1)
-        result.push({x:counter, y:counter * 10})
+    const updateGraph = (value) => {
+        result = data
+        result.push({x:counter, y:value})
+        tickValues = xAxis
+        tickValues.push(counter + 1)
         setData(result)
+        setXAxis(tickValues)
+        setCounter(counter + 1)
     }
 
-    useEffect(() => {
-    }, [data]);
+    const getData = (moyenne) => {  // Si le test est en marche, alors le graphique va être updaté
+        if(testState){
+            updateGraph(moyenne)
+        }
+    }
+
+    const handleTestState = (state) => {
+        setTestState(state)
+    }
 
     return (
 
@@ -119,22 +122,21 @@ function Ethylometre({handleLogout, renderNextPage}) {
 
                                     {/*Rajouter les onClick action pour partir, arreter ou calibrer le test*/}
 
-                                    <StartTest test="ethylo"/>
+                                    <StartTest test="ethylo" handleTestState={handleTestState}/>
                                     
                                     <Divider/>
-                                    <Ethylo/>
-
+                                    <Ethylo getData={getData} handleTestSTate={handleTestState}/>
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
 
-                    <Switch>
+                    {/*<Switch>
                         <Route path="/switches" component={Switches}/>
                     </Switch>
                     <Switch>
                         <Route path="/ethylometre" component={Ethylo}/>
-                    </Switch>
+                    </Switch>*/}
 
                     {/*General informations card*/}
 
@@ -144,11 +146,9 @@ function Ethylometre({handleLogout, renderNextPage}) {
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     Réglages
                                 </Typography>
-                                <Typography variant="body2" component="p">
-                                    <p>Cette carte va contenir les informations sur l'usager</p>
-                                </Typography>
-                                <Button onClick={handleClick}>ADD DATA</Button>
-                                <h1>{counter}</h1>
+                                {/*<Button onClick={handleClick}>ADD DATA</Button>*/}
+                                <ChangeDebitMinMax/>
+                                {/*<h1>{counter}</h1>*/}
                             </CardContent>
                         </Card>
                     </Grid>
@@ -197,7 +197,7 @@ function Ethylometre({handleLogout, renderNextPage}) {
                                                 data={data}
                                             />
                                             <VictoryAxis crossAxis
-                                                         tickValues={[0,1,2, 3, 4, 5, 6]}
+                                                         tickValues={xAxis}
                                                          style={{
                                                              tickLabels: {fontSize: 5, padding: 2}
                                                          }}
