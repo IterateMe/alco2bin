@@ -8,7 +8,6 @@ import {
     makeStyles,
     Grid,
     Box,
-    responsiveFontSizes
 } from '@material-ui/core';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@material-ui/core';
 import {Container} from "@material-ui/core";
@@ -21,7 +20,7 @@ import {Link, Route, Switch, Router, BrowserRouter} from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Footer from "../components/footer";
-import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from 'victory';
+import { VictoryLine, VictoryChart, VictoryTheme, VictoryAxis } from 'victory';
 
 function Ethylometre({handleLogout, renderNextPage}) {
 
@@ -60,12 +59,27 @@ function Ethylometre({handleLogout, renderNextPage}) {
         renderNextPage("mainDashboard");
     };
 
-    const data = [
-        {a:1, b:10},
-        {a:2, b:20},
-        {a:3, b:30},
-        {a:4, b:40}
-    ];
+    const [counter, setCounter] = useState(4)
+
+    const [data, setData] = useState([{x:0, y:10}]
+
+    )
+
+    let result = [
+        {x:1, y:10},
+        {x:2, y:20},
+        {x:3, y:30},
+        {x:4, y:40}
+    ]
+
+    const handleClick = () => {
+        setCounter(counter + 1)
+        result.push({x:counter, y:counter * 10})
+        setData(result)
+    }
+
+    useEffect(() => {
+    }, [data]);
 
     return (
 
@@ -133,6 +147,8 @@ function Ethylometre({handleLogout, renderNextPage}) {
                                 <Typography variant="body2" component="p">
                                     <p>Cette carte va contenir les informations sur l'usager</p>
                                 </Typography>
+                                <Button onClick={handleClick}>ADD DATA</Button>
+                                <h1>{counter}</h1>
                             </CardContent>
                         </Card>
                     </Grid>
@@ -177,32 +193,26 @@ function Ethylometre({handleLogout, renderNextPage}) {
                                             width={400}
                                             theme={VictoryTheme.material}
                                         >
-                                            <VictoryBar
-                                                padding={10}
+                                            <VictoryLine
                                                 data={data}
-                                                x="a"
-                                                y="b"
-
                                             />
                                             <VictoryAxis crossAxis
-
-                                                         tickValues={[2, 3, 4, 5]}
+                                                         tickValues={[0,1,2, 3, 4, 5, 6]}
                                                          style={{
-                                                             tickLabels: {fontSize: 5, padding: 20}
+                                                             tickLabels: {fontSize: 5, padding: 2}
                                                          }}
                                                          standalone={false}
                                             />
                                             <VictoryAxis dependentAxis crossAxis
 
                                                          style={{
-                                                             tickLabels: {fontSize: 5, padding: 20}
+                                                             tickLabels: {fontSize: 5, padding: 2}
                                                          }}
-                                                         domain={[-10, 100]}
+                                                         domain={[0, 100]}
                                                          theme={VictoryTheme.material}
                                                          standalone={false}
                                             />
                                         </VictoryChart>
-
                             </CardContent>
                         </Card>
                     </Grid>

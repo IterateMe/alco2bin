@@ -51,8 +51,8 @@ function Reflex({handleLogout, renderNextPage}) {
     };
 
     const data = [
-        [{a:"Result", b:10}],
-        [{a:"Result", b:20}]
+        [{x:"Résultat", y:300}],
+        [{x:"Résultat", y:700}]
     ];
 
     return (
@@ -165,14 +165,14 @@ function Reflex({handleLogout, renderNextPage}) {
                                     domainPadding={{ x: 10 }}
                                 >
                                     <VictoryStack horizontal
-                                        colorScale={["black", "blue"]}
+                                        colorScale={["orange", "blue"]}
                                     >
                                         <VictoryBar
-                                            data={[{x:"Résultat", y:100}]}
+                                            data={data[0]}
                                         />
 
                                         <VictoryBar
-                                            data={[{x:"Résultat", y:200}]}
+                                            data={data[1]}
                                         />
                                     </VictoryStack>
                                     <VictoryAxis crossAxis
@@ -197,11 +197,8 @@ function Reflex({handleLogout, renderNextPage}) {
                     </Grid>
                 </Grid>
             </div>
-
             <Footer/>
-
         </Container>
-
     );
 }
 export default Reflex;
