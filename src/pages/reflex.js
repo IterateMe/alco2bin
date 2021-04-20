@@ -19,8 +19,8 @@ function Reflex({handleLogout, renderNextPage}) {
         [{x:"Résultat", y:0}],
         [{x:"Résultat", y:1000}]
     ])
-    const [testState, setTestState] = useState("Unknown")
-    const [chartColors, setChartColors] = useState(["orange", "grey"])
+    const [testState, setTestState] = useState("Success")
+    const [chartColors, setChartColors] = useState(["grey", "grey"])
 
     const useStyles = makeStyles({
         root: {
@@ -47,6 +47,8 @@ function Reflex({handleLogout, renderNextPage}) {
         },
     });
 
+    //let interval = setInterval(() => updateReflex(), 1000)
+
     const classes = useStyles();
 
     const moveToMain = () => {
@@ -55,47 +57,54 @@ function Reflex({handleLogout, renderNextPage}) {
 
     const handleTestState = (state) => {
         setTestState(state)
+        updateReflex()
     }
 
     const updateReflex= ()=> {
-        if(testState==="Pending") {
-            const http = new XMLHttpRequest();
-            const url = 'http://192.168.1.10/cmd/reflex';
-            http.open("GET", url);
-            http.send();
-            http.onload = () => {
-                const response = JSON.parse(http.responseText);
-                console.log(response);
-                setTestState(response.testState)
-                if (testState === "Error") {
-                    setChartColors(["red", "red"])
-                } else if (testState === "Success") {
-                    let result = response.result
-                    let difference = 1000 - result
-                    if (difference < 0) {
-                        difference = 0
-                    }
-                    setData(
-                        [
-                            [{x: "Résultat", y: result}],
-                            [{x: "Résultat", y: difference}]
-                        ]
-                    )
-                } else if (testState === "Pending") {
-                    setChartColors(["orange", "blue"])
+        console.log("Update reflex", testState)
+        const http = new XMLHttpRequest();
+        const url = 'http://192.168.1.10/cmd/reflex';
+        http.open("GET", url);
+        http.send();
+        http.onload = () => {
+            const response = JSON.parse(http.responseText);
+            //console.log(response);
+            setTestState(response.testState)
+            if (testState === "Error") {
+                setChartColors(["red", "red"])
+            } else if (testState === "Success") {
+                let result = response.result
+                let difference = 1000 - result
+                if (difference < 0) {
+                    difference = 0
                 }
+                setData(
+                    [
+                        [{x: "Résultat", y: result}],
+                        [{x: "Résultat", y: difference}]
+                    ]
+                )
+            } else if (testState === "Pending") {
+                setChartColors(["orange", "blue"])
+                setTimeout(updateReflex, 1000)
             }
         }
     }
 
     useEffect(()=>{
-        setInterval(() => updateReflex(), 1000);
-    })
-
-    useEffect(()=>{
-
+        console.log("UseEffect - DATA UPDATE")
     },[chartColors, data, testState])
 
+
+    //FOR TESTS
+    const setPending = () => {
+        handleTestState("Pending")
+
+    }
+
+    const setSuccess = () => {
+        handleTestState("Success")
+    }
 
     return (
 
@@ -161,6 +170,8 @@ function Reflex({handleLogout, renderNextPage}) {
                                 <Typography variant="body2" component="p">
                                     <p>Aucun réglage disponible pour l'instant</p>
                                 </Typography>
+                                <button onClick={setPending}>Pending</button>
+                                <button onClick={setSuccess}>Success</button>
                             </CardContent>
                         </Card>
                     </Grid>
