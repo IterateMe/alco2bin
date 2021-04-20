@@ -22,7 +22,7 @@ const StartTest = (props) => {
                 console.log(response);
                 const status = response.status;
                 if(status==="success"){
-                    setState("pending")
+                    props.handleTestState("Pending")
                     setMessage("Test démarré")
                 }else if(status==="error"){
                     setMessage(response.message)
