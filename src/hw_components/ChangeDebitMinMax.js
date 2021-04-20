@@ -54,7 +54,7 @@ const ChangeDebitMinMax = (props) => {
             }
             const json = {
                 "min": min,
-                "max": max,
+                "max": max
             };
             //args.concat(this.props.test)
             http.send(JSON.stringify(json));
