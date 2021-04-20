@@ -3,7 +3,31 @@ import Button from "@material-ui/core/Button";
 import { Typography } from '@material-ui/core';
 
 const ChangeDebitMinMax = (props) => {
-    const handleClick = (minMax, value, operator) => {
+
+    const [min, setMin]=useState(400);
+    const [max, setMax]=useState(600);
+
+    function handleIncrementMax(){
+        setMax(max+debitLimitIncrementValue)
+
+    }
+
+    function handleDecrementMax(){
+        setMax(max-debitLimitIncrementValue)
+     
+    }
+
+    function handleIncrementMin(){
+        setMin(min+debitLimitIncrementValue)
+
+    }
+
+    function handleDecrementMin(){
+        setMin(min-debitLimitIncrementValue)
+
+    }
+
+    const postValues = () => {
         const http = new XMLHttpRequest();
         const url = 'http://192.168.1.10/cmd/change_debit';
 
@@ -29,9 +53,8 @@ const ChangeDebitMinMax = (props) => {
                 }
             }
             const json = {
-                "minMax": minMax,
-                "value": value,
-                "operator": operator
+                "min": min,
+                "max": max,
             };
             //args.concat(this.props.test)
             http.send(JSON.stringify(json));
@@ -39,7 +62,7 @@ const ChangeDebitMinMax = (props) => {
     }
 
     const handleRefresh = () => {
-        const http = new XMLHttpRequest();
+       /* const http = new XMLHttpRequest();
         const url = 'http://192.168.1.10/cmd/getMinMax';
         http.open("GET", url);
         http.send();
@@ -48,11 +71,11 @@ const ChangeDebitMinMax = (props) => {
             console.log(response);
             setMax(response["max"])
             setMin(response["min"])
-        }
+        }*/
+        setMax(600)
+        setMin(400)
     }
 
-    const [min, setMin] = useState('Inconnu');
-    const [max, setMax] = useState('Inconnu');
     const [pending, setPending] = useState(0);
     const [state, setState] = useState();
     const [message, setMessage] = useState("");
@@ -62,18 +85,22 @@ const ChangeDebitMinMax = (props) => {
         handleRefresh()
     }, []);
 
+    useEffect(()=>{
+        postValues()
+    },[min,max])
+
     return (
         <div>
             <h3>Débit expiratoire cible</h3>
             <p>
-                MAX :<Button onClick={handleClick("max", debitLimitIncrementValue, "-")}>-</Button>{max}<Button
-                onClick={handleClick("max", debitLimitIncrementValue, "+")}>+</Button>
+                MAX :<Button onClick={handleDecrementMax}>-</Button>{max}<Button
+                onClick={handleIncrementMax}>+</Button>
             </p>
             <p>
-                MIN : <Button onClick={handleClick("min", debitLimitIncrementValue, "-")}>-</Button>{min}<Button
-                onClick={handleClick("min", debitLimitIncrementValue, "+")}>+</Button>
+                MIN : <Button onClick={handleDecrementMin}>-</Button>{min}<Button
+                onClick={handleIncrementMin}>+</Button>
             </p>
-            <Button onClick={handleRefresh}>Rafraîchir</Button>
+            <Button onClick={handleRefresh}>Réinitialiser</Button>
         </div>
     );
     }

@@ -51,6 +51,24 @@ function Reflex({handleLogout, renderNextPage}) {
         [{x:"Résultat", y:700}]
     ];
 
+    const updateReflex= ()=> {
+        const http = new XMLHttpRequest();
+        const url = 'http://192.168.1.10/cmd/reflex';
+
+        http.open("GET", url);
+        http.send();
+        http.onload = () => {
+            const response = JSON.parse(http.responseText);
+            console.log(response);
+            
+        }
+
+    }
+
+    useEffect(()=>{
+        setInterval(() => updateReflex(), 1000);
+    })
+
     return (
 
         <Container>
@@ -88,7 +106,7 @@ function Reflex({handleLogout, renderNextPage}) {
                                 </Typography>
                                 <Typography variant="body2" component="p">
 
-                                    <StartTest/>
+                                    <StartTest test="reflex"/>
 
                                     <Divider/>
 

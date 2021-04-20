@@ -208,7 +208,7 @@ function Ethylometre({handleLogout, renderNextPage}) {
                                                          style={{
                                                              tickLabels: {fontSize: 5, padding: 2}
                                                          }}
-                                                         domain={[0, 100]}
+                                                         domain={[0, 0.2]}
                                                          theme={VictoryTheme.material}
                                                          standalone={false}
                                             />
