@@ -99,7 +99,6 @@ function Reflex({handleLogout, renderNextPage}) {
     //FOR TESTS
     const setPending = () => {
         handleTestState("Pending")
-
     }
 
     const setSuccess = () => {
@@ -254,4 +253,5 @@ function Reflex({handleLogout, renderNextPage}) {
         </Container>
     );
 }
+
 export default Reflex;
