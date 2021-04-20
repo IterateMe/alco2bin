@@ -70,9 +70,12 @@ function Reflex({handleLogout, renderNextPage}) {
             const response = JSON.parse(http.responseText);
             //console.log(response);
             setTestState(response.testState)
-            if (testState === "Error") {
+            console.log(response.testState);
+            if (response.testState === "Error") {
+                
                 setChartColors(["red", "red"])
-            } else if (testState === "Success") {
+            } else if (response.testState === "Success") {
+                setChartColors(["blue", "grey"])
                 let result = response.result
                 let difference = 1000 - result
                 if (difference < 0) {
@@ -84,8 +87,8 @@ function Reflex({handleLogout, renderNextPage}) {
                         [{x: "Résultat", y: difference}]
                     ]
                 )
-            } else if (testState === "Pending") {
-                setChartColors(["orange", "blue"])
+            } else if (response.testState === "Pending") {
+                setChartColors(["grey", "grey"])
                 setTimeout(updateReflex, 1000)
             }
         }
