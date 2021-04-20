@@ -6,6 +6,7 @@ class Ethylo extends React.Component {
         this.url = 'http://192.168.1.10/cmd/ethylo';
         this.state = {
             alcool: "inconnu",
+            moy: "inconnu",
             maxAlcool : "inconnu",
             flow: "inconnu",
             testState: false,
@@ -25,7 +26,7 @@ class Ethylo extends React.Component {
             if(response.testState!=="Pending"){
                 this.setState({alcool:0})
             }else{
-                this.props.getData(this.state.alcool)
+                this.props.getData(this.state.moy)
                 this.props.handleTestSTate(this.state.testState)
             }
             
@@ -44,7 +45,7 @@ class Ethylo extends React.Component {
         return (
             <div className="Switches">
                 <p>Les valeurs de l'éthylomètre sont: </p>
-                <b><p id="ethylo">Ethylomètre : {this.state.alcool} g/L</p></b>
+                <b><p id="ethylo">Ethylomètre : {this.state.moy} g/L</p></b>
                 <b><p id="ethylo">Valeur max : {this.state.maxAlcool} g/L</p></b>
                 <b><p id="ethylo">Débit expiratoire : {this.state.flow} mL/s</p></b>
             </div>

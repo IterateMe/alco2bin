@@ -75,7 +75,7 @@ function Ethylometre({handleLogout, renderNextPage}) {
     }
 
     const getData = (moyenne) => {  // Si le test est en marche, alors le graphique va être updaté
-        if(testState){
+        if(testState==="Pending"){
             updateGraph(moyenne)
         }
     }
