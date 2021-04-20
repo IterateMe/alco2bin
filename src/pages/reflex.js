@@ -68,9 +68,8 @@ function Reflex({handleLogout, renderNextPage}) {
             console.log(response);
             setTestState(response.testState)
             if(testState==="Error"){
-                setChartColors(["orange", "red"])
+                setChartColors(["red", "red"])
             }else if(testState==="Success"){
-                setChartColors(["orange", "blue"])
                 let result =  response.result
                 let difference = 1000 - result
                 if(difference < 0){
@@ -82,6 +81,8 @@ function Reflex({handleLogout, renderNextPage}) {
                         [{x:"Résultat", y:difference}]
                     ]
                 )
+            }else if(testState==="Pending"){
+                setChartColors(["orange", "blue"])
             }
         }
 
