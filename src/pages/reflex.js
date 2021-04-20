@@ -15,6 +15,13 @@ import {VictoryBar, VictoryChart, VictoryTheme, VictoryStack, VictoryAxis} from 
 
 function Reflex({handleLogout, renderNextPage}) {
 
+    const [data, setData] = useState([
+        [{x:"Résultat", y:0}],
+        [{x:"Résultat", y:1000}]
+    ])
+    const [testState, setTestState] = useState("Unknown")
+    const [chartColors, setChartColors] = useState(["orange", "grey"])
+
     const useStyles = makeStyles({
         root: {
             flexGrow: 1,
@@ -46,10 +53,9 @@ function Reflex({handleLogout, renderNextPage}) {
         renderNextPage("mainDashboard");
     };
 
-    const data = [
-        [{x:"Résultat", y:300}],
-        [{x:"Résultat", y:700}]
-    ];
+    const handleTestState = (state) => {
+        setTestState(state)
+    }
 
     const updateReflex= ()=> {
         const http = new XMLHttpRequest();
@@ -60,7 +66,22 @@ function Reflex({handleLogout, renderNextPage}) {
         http.onload = () => {
             const response = JSON.parse(http.responseText);
             console.log(response);
-            
+            setTestState(response.testState)
+            if(testState!=="Error"){
+                setChartColors(["orange", "red"])
+            }else if(testState==="Pending"){
+                let result =  response.result
+                let difference = 1000 - result
+                if(difference < 0){
+                    difference = 0
+                }
+                setData(
+                    [
+                        [{x:"Résultat", y:result}],
+                        [{x:"Résultat", y:difference}]
+                    ]
+                )
+            }
         }
 
     }
@@ -68,6 +89,11 @@ function Reflex({handleLogout, renderNextPage}) {
     useEffect(()=>{
         setInterval(() => updateReflex(), 1000);
     })
+
+    useEffect(()=>{
+
+    },[chartColors, data, testState])
+
 
     return (
 
@@ -106,10 +132,9 @@ function Reflex({handleLogout, renderNextPage}) {
                                 </Typography>
                                 <Typography variant="body2" component="p">
 
-                                    <StartTest test="reflex"/>
+                                    <StartTest test="reflex" handleTestState={handleTestState}/>
 
                                     <Divider/>
-
 
                                 </Typography>
                             </CardContent>
@@ -152,7 +177,7 @@ function Reflex({handleLogout, renderNextPage}) {
                                             <li>Déclancher le test en appuyant sur "Start Test"</li>
                                             <li>Appuyer rapidement sur le bouton lorsque le LED s'allume sur le FPGA</li>
                                             <li>Attendre le résultat apparaître sur le FPGA ou cette interface</li>
-                                            <li>Si vous êtes allés trop vite, vous devrez recommencer</li>
+                                            <li>Si vous êtes allés trop vite, vous devrez redémarrer le test</li>
                                         </ol>
                                     </p>
                                 </Typography>
@@ -180,7 +205,7 @@ function Reflex({handleLogout, renderNextPage}) {
                                     domainPadding={{ x: 10 }}
                                 >
                                     <VictoryStack horizontal
-                                        colorScale={["orange", "blue"]}
+                                        colorScale={chartColors}
                                     >
                                         <VictoryBar
                                             data={data[0]}

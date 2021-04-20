@@ -23,7 +23,7 @@ const StartTest = (props) => {
                 const status = response.status;
                 if(status==="success"){
                     setState("pending")
-                    setMessage("Test démarré, veuillez souffler dans l'éthylomètre")
+                    setMessage("Test démarré")
                 }else if(status==="error"){
                     setMessage(response.message)
                 }
