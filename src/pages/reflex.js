@@ -58,34 +58,34 @@ function Reflex({handleLogout, renderNextPage}) {
     }
 
     const updateReflex= ()=> {
-        const http = new XMLHttpRequest();
-        const url = 'http://192.168.1.10/cmd/reflex';
-
-        http.open("GET", url);
-        http.send();
-        http.onload = () => {
-            const response = JSON.parse(http.responseText);
-            console.log(response);
-            setTestState(response.testState)
-            if(testState==="Error"){
-                setChartColors(["red", "red"])
-            }else if(testState==="Success"){
-                let result =  response.result
-                let difference = 1000 - result
-                if(difference < 0){
-                    difference = 0
+        if(testState==="Pending") {
+            const http = new XMLHttpRequest();
+            const url = 'http://192.168.1.10/cmd/reflex';
+            http.open("GET", url);
+            http.send();
+            http.onload = () => {
+                const response = JSON.parse(http.responseText);
+                console.log(response);
+                setTestState(response.testState)
+                if (testState === "Error") {
+                    setChartColors(["red", "red"])
+                } else if (testState === "Success") {
+                    let result = response.result
+                    let difference = 1000 - result
+                    if (difference < 0) {
+                        difference = 0
+                    }
+                    setData(
+                        [
+                            [{x: "Résultat", y: result}],
+                            [{x: "Résultat", y: difference}]
+                        ]
+                    )
+                } else if (testState === "Pending") {
+                    setChartColors(["orange", "blue"])
                 }
-                setData(
-                    [
-                        [{x:"Résultat", y:result}],
-                        [{x:"Résultat", y:difference}]
-                    ]
-                )
-            }else if(testState==="Pending"){
-                setChartColors(["orange", "blue"])
             }
         }
-
     }
 
     useEffect(()=>{
